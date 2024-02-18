@@ -149,7 +149,7 @@ info.les = (() => {
     let words = les ? les2.split(", ") : 0;
     let message = les ? `Je hebt ${words[0]} van ${words[1]} in lokaal ${words[2]}.` : "Je hebt nu geen les.";
 
-    document.querySelector("#message").innerHTML = les ? les : "";
+    // document.querySelector("#message").innerHTML = les ? les : "";
     document.querySelector("#messageWords").innerHTML = message;
 
     return [les, message];
@@ -162,8 +162,8 @@ info.volgendeLes = (() => {
     let words = next ? next2.split(", ") : 0;
     let message = next ? `Je hebt zometeen ${words[0]} van ${words[1]} in lokaal ${words[2]}.` : "Je hebt straks geen les.";
 
-    document.querySelector("#message2").innerHTML = next ? next : "";
-    document.querySelector("#message2Words").innerHTML = message;
+    // document.querySelector("#message2")?.innerHTML = next ? next : "";
+    document.querySelector("#message2Words")?.innerHTML = message;
 
     return [next, message];
 })();
