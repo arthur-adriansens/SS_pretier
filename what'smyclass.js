@@ -171,3 +171,4 @@ function getClass() {
 
     console.log(info);
 }
+getClass()
