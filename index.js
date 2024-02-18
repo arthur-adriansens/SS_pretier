@@ -489,7 +489,7 @@ class menuButtons {
         const settings_wrapper = document.createElement("div");
         settings_wrapper.id = "settingsMenuWrapper";
         settings_wrapper.classList.add("settingsMenuWrapper");
-        settings_wrapper.style.opacity = 1;
+        settings_wrapper.style.opacity = 0;
 
         //menu
         const settings_menu = document.createElement("div");
@@ -659,6 +659,13 @@ class Modes {
 
     toggle_theme(mode = "shrek") {
         this.theme_setup(mode);
+
+        if (mode == "space") {
+            fetch("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY", {
+                method: "GET",
+            });
+        }
+
         this.background.onload = this.profElem.onload = (e) => {
             e.target.style.opacity = "100%";
         };
