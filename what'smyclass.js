@@ -106,66 +106,68 @@ const hoursMiddaguur = [
     ["15u57", "16u45"], //8
 ];
 
-// dynamic info setup ==> can change
-let date = new Date();
-let day = Object.keys(days)[date.getDay()];
-let timeString = `${date.getHours()}:${date.getMinutes()}`;
-let time = [date.getHours(), date.getMinutes()];
+function getClass() {
+    // dynamic info setup ==> can change
+    let date = new Date();
+    let day = Object.keys(days)[date.getDay()];
+    let timeString = `${date.getHours()}:${date.getMinutes()}`;
+    let time = [date.getHours(), date.getMinutes()];
 
-const schedule = () => {
-    let hours = days[day][days[day].length - 1] ? hoursMiddaguur : hoursNormaal;
-    return hours.slice(0, days[day][0]);
-};
+    const schedule = () => {
+        let hours = days[day][days[day].length - 1] ? hoursMiddaguur : hoursNormaal;
+        return hours.slice(0, days[day][0]);
+    };
 
-// get current class
-const info = {
-    day: day,
-    timeString: timeString,
-    time: time,
-    minutes: time[0] * 60 + time[1],
-    schedule: schedule(),
-    starts: schedule()
-        .flat()
-        .filter((x, i) => i % 2 == 0),
-};
+    // get current class
+    const info = {
+        day: day,
+        timeString: timeString,
+        time: time,
+        minutes: time[0] * 60 + time[1],
+        schedule: schedule(),
+        starts: schedule()
+            .flat()
+            .filter((x, i) => i % 2 == 0),
+    };
 
-info.lesuur = (() => {
-    for (let i in info.schedule.flat()) {
-        let time = info.schedule.flat()[i].split("u").map(Number);
-        let minutes = time[0] * 60 + time[1];
+    info.lesuur = (() => {
+        for (let i in info.schedule.flat()) {
+            let time = info.schedule.flat()[i].split("u").map(Number);
+            let minutes = time[0] * 60 + time[1];
 
-        if (info.minutes <= minutes) {
-            let result = i % 2 == 0 ? info.schedule.flat()[i] : info.schedule.flat()[i - 1];
+            if (info.minutes <= minutes) {
+                let result = i % 2 == 0 ? info.schedule.flat()[i] : info.schedule.flat()[i - 1];
 
-            return info.starts.indexOf(result) + 1; //start bij 0 => +1
+                return info.starts.indexOf(result) + 1; //start bij 0 => +1
+            }
         }
-    }
-})();
+    })();
 
-info.les = (() => {
-    let les = infoList[days[info.day][1] + info.lesuur];
-    let les2 = infoListNet[days[info.day][1] + info.lesuur];
+    info.les = (() => {
+        let les = infoList[days[info.day][1] + info.lesuur];
+        let les2 = infoListNet[days[info.day][1] + info.lesuur];
 
-    let words = les ? les2.split(", ") : 0;
-    let message = les ? `Je hebt ${words[0]} van ${words[1]} in lokaal ${words[2]}.` : "Je hebt nu geen les.";
+        let words = les ? les2.split(", ") : 0;
+        let message = les ? `Je hebt ${words[0]} van ${words[1]} in lokaal ${words[2]}.` : "Je hebt nu geen les.";
 
-    // document.querySelector("#message").innerHTML = les ? les : "";
-    document.querySelector("#messageWords").innerHTML = message;
+        // document.querySelector("#message").innerHTML = les ? les : "";
+        document.querySelector("#messageWords").innerHTML = message;
 
-    return [les, message];
-})();
+        return [les, message];
+    })();
 
-info.volgendeLes = (() => {
-    let next = infoList[days[info.day][1] + info.lesuur + 1];
-    let next2 = infoListNet[days[info.day][1] + info.lesuur + 1];
+    info.volgendeLes = (() => {
+        let next = infoList[days[info.day][1] + info.lesuur + 1];
+        let next2 = infoListNet[days[info.day][1] + info.lesuur + 1];
 
-    let words = next ? next2.split(", ") : 0;
-    let message = next ? `Je hebt zometeen ${words[0]} van ${words[1]} in lokaal ${words[2]}.` : "Je hebt straks geen les.";
+        let words = next ? next2.split(", ") : 0;
+        let message = next ? `Je hebt zometeen ${words[0]} van ${words[1]} in lokaal ${words[2]}.` : "Je hebt straks geen les.";
 
-    // document.querySelector("#message2")?.innerHTML = next ? next : "";
-    document.querySelector("#message2Words")?.innerHTML = message;
+        // document.querySelector("#message2")?.innerHTML = next ? next : "";
+        document.querySelector("#message2Words").innerHTML = message;
 
-    return [next, message];
-})();
+        return [next, message];
+    })();
 
-console.log(info);
+    console.log(info);
+}
