@@ -490,6 +490,7 @@ class menuButtons {
         settings_wrapper.id = "settingsMenuWrapper";
         settings_wrapper.classList.add("settingsMenuWrapper");
         settings_wrapper.style.opacity = 0;
+        settings_wrapper.style.pointerEvents = "none";
 
         //menu
         const settings_menu = document.createElement("div");
@@ -615,6 +616,13 @@ class menuButtons {
         newButton = document.createElement("button");
         newButton.innerHTML = "save";
         newButton.onclick = () => savePref();
+        buttons.push(newButton);
+
+        //refresh class
+        newButton = document.createElement("button");
+        newButton.id = "refresh_class";
+        newButton.innerHTML = "get class";
+        newButton.onclick = window.getClass;
         buttons.push(newButton);
 
         //button-wrapper

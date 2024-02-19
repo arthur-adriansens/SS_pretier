@@ -106,7 +106,7 @@ const hoursMiddaguur = [
     ["15u57", "16u45"], //8
 ];
 
-function getClass() {
+window.getClass = () => {
     // dynamic info setup ==> can change
     let date = new Date();
     let day = Object.keys(days)[date.getDay()];
@@ -170,5 +170,6 @@ function getClass() {
     })();
 
     console.log(info);
-}
-getClass()
+};
+
+window.getClass();
