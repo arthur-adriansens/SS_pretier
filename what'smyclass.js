@@ -148,7 +148,7 @@ window.getClass = () => {
         let les2 = infoListNet[days[info.day][1] + info.lesuur];
 
         let words = les ? les2.split(", ") : 0;
-        let message = les ? `Je hebt ${words[0]} van ${words[1]} in lokaal ${words[2]}.` : "Je hebt nu geen les.";
+        let message = les ? `Je hebt <b>${words[0]}</b> van ${words[1]} in lokaal ${words[2]}.` : "Je hebt nu geen les.";
 
         // document.querySelector("#message").innerHTML = les ? les : "";
         document.querySelector("#messageWords").innerHTML = message;

@@ -1023,6 +1023,7 @@ function style() {
 
                 .js-btn-home {
                     opacity: 0 !important;
+                    pointer-events: none;
                 }
 
                 .topnav:last-child,
